@@ -1,0 +1,14 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+<h1>{{ blog.name }}</h1>
+{% if user == blog.author.user %}
+<a href="{% url 'blog-delete' blog.id %}">Delete </a>
+<a href="{% url 'blog-update' blog.id %}">Update </a>
+{% endif %}
+<p><strong>Post date</strong> {{ blog.post_date }}</p>
+<p><strong>Author:</strong> <a href="{% url 'blogs-by-author' blog.author.pk %}">{{ blog.author }}</a></p>
+<p><strong>Description:</strong></p>
+<p style="white-space:pre-wrap;">{{ blog.description }}</p>
+{% endblock %}
