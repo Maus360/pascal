@@ -3,7 +3,7 @@
 
 <head>
 
-    {% block title %}<title>Django DIY Blog</title>{% endblock %}
+    {% block title %}<title>Pascal Blog</title>{% endblock %}
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -34,6 +34,7 @@
                     <li><a href="{% url 'logout'%}?next={{request.path}}">Logout</a></li>
                     {% else %}
                     <li><a href="{% url 'login'%}?next={{request.path}}">Login</a></li>
+                    <li><a href="{% url 'signup'%}?next={{request.path}}">Sign up</a></li>
                     {% endif %}
                 </ul>
 
