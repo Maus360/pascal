@@ -12,6 +12,7 @@ coverage = "*"
 django = "*"
 psycopg2-binary = "*"
 gunicorn = "*"
+django-heroku = "*"
 
 [requires]
 python_version = "3.7"
