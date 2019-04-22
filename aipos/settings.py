@@ -23,9 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = "pgdn!$uwt3a=h5t+w7d!fnkf^*)nncbuv(1w-+(76%v1a!81$-"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["localhost", "herokuapp.com"]
 
 
 # Application definition
@@ -85,7 +85,29 @@ DATABASES = {
     }
 }
 
-
+LOGGING = {
+    "version": 1,
+    "formatters": {
+        "verbose": {
+            "format": "%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s"
+        },
+        "simple": {"format": "%(levelname)s %(message)s"},
+    },
+    "handlers": {
+        "console": {
+            "level": "DEBUG",
+            "class": "logging.StreamHandler",
+            "formatter": "simple",
+        },
+        "file": {
+            "level": "DEBUG",
+            "class": "logging.FileHandler",
+            "filename": "file.log",
+            "formatter": "simple",
+        },
+    },
+    "loggers": {"django": {"handlers": ["file"], "level": "DEBUG", "propagate": True}},
+}
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
 
