@@ -88,9 +88,7 @@ DATABASES = {
 LOGGING = {
     "version": 1,
     "formatters": {
-        "verbose": {
-            "format": "%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s"
-        },
+        "verbose": {"format": "%(levelname)s %(asctime)s %(module)s %(message)s"},
         "simple": {"format": "%(levelname)s %(message)s"},
     },
     "handlers": {
@@ -103,12 +101,12 @@ LOGGING = {
             "level": "DEBUG",
             "class": "logging.FileHandler",
             "filename": "file.log",
-            "formatter": "simple",
+            "formatter": "verbose",
         },
     },
     "loggers": {
-        "django": {"handlers": ["file"], "level": "DEBUG", "propagate": True},
-        "pascal": {"handlers": ["file"], "level": "DEBUG", "propagate": True},
+        "django": {"handlers": ["file"], "level": "INFO", "propagate": True},
+        "pascal": {"handlers": ["file"], "level": "INFO", "propagate": True},
     },
 }
 # Password validation
@@ -140,5 +138,5 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
-
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
 STATIC_URL = "/static/"
