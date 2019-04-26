@@ -9,7 +9,7 @@ from django.http import HttpResponseRedirect
 from datetime import date
 import logging
 
-logger = logging.getLogger(__name__)
+logger = logging.getLogger("pascal")
 
 
 def index(request):
@@ -83,8 +83,15 @@ class BlogDeleteView(generic.DeleteView):
     def get(self, request, *args, **kwargs):
         blog = self.get_queryset().first()
         if request.user == blog.author.user:
+            logger.info("user (%s) want to delete blog (%s)", request.user, blog)
             return super(BlogDeleteView, self).get(request, *args, **kwargs)
         else:
+            logger.info(
+                "user (%s) want to delete blog (%s) by author (%s)",
+                request.user,
+                blog,
+                blog.author.user,
+            )
             return HttpResponseRedirect(
                 reverse("blog-detail", kwargs={"pk": self.kwargs["pk"]})
             )
@@ -92,11 +99,15 @@ class BlogDeleteView(generic.DeleteView):
     def post(self, request, *args, **kwargs):
         self.items_to_delete = self.request.POST.getlist("itemsToDelete")
         if self.request.POST.get("confirm"):
+            logger.info("user (%s) delete blog (%s)", request.user, self.get_queryset())
             # when confirmation page has been displayed and confirm button pressed
             queryset = self.get_queryset()
             queryset.delete()  # deleting on the queryset is more efficient than on the model object
             return HttpResponseRedirect(self.success_url)
         elif self.request.POST.get("cancel"):
+            logger.info(
+                "user (%s) not delete blog (%s)", request.user, self.get_queryset()
+            )
             # when confirmation page has been displayed and cancel button pressed
             return HttpResponseRedirect(self.success_url)
         else:
@@ -112,8 +123,15 @@ class BlogUpdateView(generic.UpdateView):
     def get(self, request, *args, **kwargs):
         blog = self.get_queryset().first()
         if request.user == blog.author.user:
+            logger.info("user (%s) want to update blog (%s)", request.user, blog)
             return super(BlogUpdateView, self).get(request, *args, **kwargs)
         else:
+            logger.info(
+                "user (%s) want to update blog (%s) by author (%s)",
+                request.user,
+                blog,
+                blog.author.user,
+            )
             return HttpResponseRedirect(
                 reverse("blog-detail", kwargs={"pk": self.kwargs["pk"]})
             )
@@ -136,8 +154,15 @@ class BlogCreateView(generic.CreateView):
         user = self.request.user
         target_author = Author.objects.filter(user=user).first()
         if target_author is None:
+            logger.info("register new author by user (%s)", self.request.user)
             form.instance.author = Author.objects.create(user=self.request.user, bio="")
+            logger.info(
+                "user (%s) create blog (%s)", self.request.user, form.instance.name
+            )
         else:
+            logger.info(
+                "user (%s) create blog (%s)", self.request.user, form.instance.name
+            )
             form.instance.author = target_author
         form.instance.post_date = date.today()
         return super().form_valid(form)
