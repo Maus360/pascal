@@ -81,9 +81,7 @@ class BlogDeleteView(generic.DeleteView):
         return self.queryset
 
     def get(self, request, *args, **kwargs):
-        print(self.kwargs["pk"])
         blog = self.get_queryset().first()
-        print(request.user, blog)
         if request.user == blog.author.user:
             return super(BlogDeleteView, self).get(request, *args, **kwargs)
         else:
@@ -94,18 +92,14 @@ class BlogDeleteView(generic.DeleteView):
     def post(self, request, *args, **kwargs):
         self.items_to_delete = self.request.POST.getlist("itemsToDelete")
         if self.request.POST.get("confirm"):
-            print(1)
             # when confirmation page has been displayed and confirm button pressed
             queryset = self.get_queryset()
-            print(queryset)
             queryset.delete()  # deleting on the queryset is more efficient than on the model object
             return HttpResponseRedirect(self.success_url)
         elif self.request.POST.get("cancel"):
-            print(2)
             # when confirmation page has been displayed and cancel button pressed
             return HttpResponseRedirect(self.success_url)
         else:
-            print(3)
             # when data is coming from the form which lists all items
             return self.get(self, *args, **kwargs)
 
