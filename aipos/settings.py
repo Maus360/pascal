@@ -106,7 +106,10 @@ LOGGING = {
             "formatter": "simple",
         },
     },
-    "loggers": {"django": {"handlers": ["file"], "level": "DEBUG", "propagate": True}},
+    "loggers": {
+        "django": {"handlers": ["file"], "level": "DEBUG", "propagate": True},
+        "pascal": {"handlers": ["file"], "level": "DEBUG", "propagate": True},
+    },
 }
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
