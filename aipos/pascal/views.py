@@ -120,6 +120,11 @@ class BlogUpdateView(generic.UpdateView):
     fields = ["name", "description"]
     success_url = reverse_lazy("blogs")
 
+    def get_queryset(self):
+        id_ = self.kwargs["pk"]
+        self.queryset = Blog.objects.filter(pk=id_)
+        return self.queryset
+
     def get(self, request, *args, **kwargs):
         blog = self.get_queryset().first()
         if request.user == blog.author.user:
