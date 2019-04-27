@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+from aipos.secret import *
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -20,7 +21,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "pgdn!$uwt3a=h5t+w7d!fnkf^*)nncbuv(1w-+(76%v1a!81$-"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -147,17 +147,7 @@ USE_L10N = True
 
 USE_TZ = True
 
-LOGIN_REDIRECT_URL = 'index'
-
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = (
-    "410288448737-qt3ubkkc4ihak13i78c03aeh1o2a82ca.apps.googleusercontent.com"
-)  # Paste CLient Key
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = "1O-ByLcEJSK5NJccRq6ReHSs"
-
-SOCIAL_AUTH_GITHUB_KEY = "07ae1132f5d559f8d750"  # Paste Client ID
-SOCIAL_AUTH_GITHUB_SECRET = (
-    "40a7f06a27de0a4cc36889c621d5a415f3a48198"
-)  # Paste Secret Key  # Paste Secret Key
+LOGIN_REDIRECT_URL = "index"
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
