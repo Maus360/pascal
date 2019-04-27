@@ -26,7 +26,7 @@ SECRET_KEY = "pgdn!$uwt3a=h5t+w7d!fnkf^*)nncbuv(1w-+(76%v1a!81$-"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["localhost", "herokuapp.com"]
+ALLOWED_HOSTS = ["pascal.by", "localhost", "herokuapp.com"]
 
 
 # Application definition
@@ -101,7 +101,7 @@ LOGGING = {
         "file": {
             "level": "DEBUG",
             "class": "logging.FileHandler",
-            "filename": "file.log",
+            "filename": os.path.join(BASE_DIR, "file.log"),
             "formatter": "verbose",
         },
     },
