@@ -147,6 +147,8 @@ USE_L10N = True
 
 USE_TZ = True
 
+LOGIN_REDIRECT_URL = 'index'
+
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = (
     "410288448737-qt3ubkkc4ihak13i78c03aeh1o2a82ca.apps.googleusercontent.com"
 )  # Paste CLient Key
