@@ -15,13 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf.urls import url
 
 urlpatterns = [path("", include("aipos.pascal.urls")), path("admin/", admin.site.urls)]
 
 
 # Add Django site authentication urls (for login, logout, password management)
 urlpatterns += [path("accounts/", include("django.contrib.auth.urls"))]
-
+urlpatterns += [url(r"^auth/", include("social_django.urls", namespace="social"))]
 
 # Use static() to add url mapping to serve static files during development (only)
 from django.conf import settings
