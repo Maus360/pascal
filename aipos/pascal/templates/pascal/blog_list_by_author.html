@@ -1,11 +1,8 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-<h1>Blogger: {{blogger}}</h1>
-
-<h3>Bio</h3>
-
-<p>{{blogger.bio}}</p>
+{% load blog_extras %}
+<h1>Blogger: {% blogger %}</h1>
 
 
 
